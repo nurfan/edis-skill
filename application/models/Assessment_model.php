@@ -520,6 +520,9 @@ class Assessment_model extends CI_Model {
 
 	public function available_form()
 	{
+		$active_year = $this->session->userdata('login_session')['active_year'];
+		$like_param = "-".$active_year."-";
+
 		$this->db->select('
 			a.job_title_id, 
 			a.section_id,
@@ -534,6 +537,7 @@ class Assessment_model extends CI_Model {
 		$this->db->join('job_titles b', 'a.job_title_id = b.id');
 		$this->db->join('sections c', 'c.id = a.section_id');
 		$this->db->where('a.grade <=', 3);
+		$this->db->like('af.code', $like_param);
 		$this->db->group_by('a.job_title_id, a.grade, a.section_id, af.code');
 		$this->db->order_by('a.grade', 'asc');
 		return $this->db->get()->result();
