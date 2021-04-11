@@ -495,6 +495,9 @@ class Assessment_model extends CI_Model {
 
 	public function recap_participant()
 	{
+		$active_year = $this->session->userdata('login_session')['active_year'];
+		$like_param = "-".$active_year."-";
+
 		$this->db->select('
 			em.section_id,
 			em.dept_id,
@@ -509,6 +512,7 @@ class Assessment_model extends CI_Model {
 		$this->db->join('departements b', 'em.dept_id = b.id');
 		$this->db->join('sections c', 'c.id = em.section_id');
 		$this->db->join('positions d', 'd.id = em.position_id');
+		$this->db->like('af.code', $like_param);
 		$this->db->group_by('af.code, em.dept_id, em.section_id, em.grade');
 		$this->db->order_by('af.code', 'asc');
 		return $this->db->get()->result();

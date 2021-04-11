@@ -63,7 +63,11 @@ class Assessment extends CI_Controller {
         }
 
         $this->session->unset_userdata('setup_session');
+
         $data['recaps']      = $this->assessment->recap_participant();
+
+        //print_r($this->db->last_query()); die();   
+
         $data['departments'] = $this->db->get('departements')->result();
         $data['page']        = "assessment_set_participant";
         $this->load->view('template/template', $data);        

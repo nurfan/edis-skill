@@ -34,7 +34,7 @@ class Authentication extends CI_Controller {
 			
 			$isUserExist 	= $this->login->is_user_exist($nik);
 			
-			if (count($isUserExist) > 0) {
+			if (isset($isUserExist->nik) && isset($isUserExist->password)) {
 				// do verification for user's password
 				if (password_verify($password, $isUserExist->password)) {
 					// create log for success login
@@ -145,7 +145,10 @@ class Authentication extends CI_Controller {
 	 */
 	private function _prepare_user_data(string $nik) : array
 	{
+		$this->load->model('assessment_year');
+
 		$getUserData = $this->login->get_user($nik);
+		$active_year = $this->assessment_year->getActiveYear();
 
 		$dataLogin = [
 			'nik'            => $getUserData->nik,
@@ -157,7 +160,8 @@ class Authentication extends CI_Controller {
 			'grade'          => $getUserData->grade,
 			'group'          => $getUserData->group_id,
 			'level'          => $getUserData->level,
-			'department'     => $getUserData->id
+			'department'     => $getUserData->id,
+			'active_year'	 => $active_year->year
 		];
 
 		// nurfan log var_dump($dataLogin);die();

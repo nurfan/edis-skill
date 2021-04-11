@@ -145,6 +145,10 @@ class Assessment_year extends CI_Controller {
 		$this->db->where('id', $id);
 		$this->db->update('assessment_years', ['is_active' => 1]);
 		$this->session->set_flashdata('success_change_active_year', 'Active year successfully change!');
+
+		// update session active year
+		$this->updateActiveYearSession();
+
 		redirect('assessment_year');
 	}	
 
@@ -224,14 +228,19 @@ class Assessment_year extends CI_Controller {
 		];
 
 		if ($isPeriodExist > 0) {
+			// update
 			$this->db->where('year_id', $yearId)->update('assessment_settings', $storedData);
 			$this->session->set_flashdata('success_update_data', 'Update successfully!');
-			redirect('assessment_year');
+			
 		} else {
+			// insert
 			$this->db->insert('assessment_settings', $storedData);
 			$this->session->set_flashdata('success_save_data', 'Saved successfully!');
-			redirect('assessment_year');	
 		}
+
+		$this->updateActiveYearSession();
+
+		redirect('assessment_year');	
 	}
 
 	/**
@@ -289,6 +298,17 @@ class Assessment_year extends CI_Controller {
 		}
 		
 		echo json_encode($response);
+	}
+
+	public function updateActiveYearSession(){
+
+		// update activer year in session
+		$active_year = $this->manage->getActiveYear()->year;
+		$data = $this->session->userdata('login_session');
+		$data['active_year'] = $active_year;
+
+		$this->session->unset_userdata('login_session');
+		$this->session->set_userdata('login_session', $data);
 	}
 	
 }

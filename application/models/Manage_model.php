@@ -31,6 +31,11 @@ class Manage_model extends CI_Model {
 		return $this->db->get('assessment_years', 1)->row();
 	}
 
+	public function getActiveYear()
+	{
+		return $this->db->select('*')->from('assessment_years')->where('is_active', 1)->get()->row();
+	}
+
 	/**
 	 * Get all departments
 	 * 
