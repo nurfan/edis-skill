@@ -213,18 +213,18 @@ class Dashboard_model extends CI_Model {
 				/*$this->db->query("SELECT * FROM employes 
 								WHERE nik NOT IN 
 									(SELECT nik FROM assessment_forms 
-									WHERE code LIKE '%$activeYear%')
+									WHERE code LIKE '%-$activeYear-%')
 								AND name NOT LIKE '%admin%'
 								AND position_id IN (SELECT id FROM positions WHERE grade <= 3)"
 							)->num_rows();*/
 
 				$uncompleteAssessment 	= $this->db->query("SELECT * FROM assessment_forms 
-															WHERE code LIKE '%$activeYear%' 
+															WHERE code LIKE '%-$activeYear-%' 
 															AND total_poin IS NULL")->num_rows();
 				break;
 			
 			default:
-				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%$activeYear%'";
+				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%-$activeYear-%'";
 				$participant = $this->get_participants_by_head($this->nik)->result();
 
 				foreach ($participant as $key => $value) {
@@ -263,12 +263,12 @@ class Dashboard_model extends CI_Model {
 		switch ($notAdminOrHR) {
 			case FALSE:
 				return $this->db->query("SELECT * FROM assessment_forms a 
-										WHERE a.code LIKE '%$activeYear%'
+										WHERE a.code LIKE '%-$activeYear-%'
 										AND total_poin IS NOT NULL")->num_rows();
 				break;
 			
 			default:
-				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%$activeYear%'";
+				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%-$activeYear-%'";
 				$participant = $this->get_participants_by_head($this->nik)->result();
 
 				foreach ($participant as $key => $value) {
@@ -432,7 +432,7 @@ class Dashboard_model extends CI_Model {
 	 */
 	private function _uncomplete_view2(string $activeYear, int $sectOrDept) : array
 	{
-		$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%$activeYear%'";
+		$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%-$activeYear-%'";
 		$participant = $this->get_participants_by_head($this->nik)->result();
 
 		foreach ($participant as $key => $value) {
@@ -488,7 +488,7 @@ class Dashboard_model extends CI_Model {
 						JOIN sections sc ON em.section_id = sc.id
 						JOIN job_titles jt ON em.job_title_id = jt.id
 						WHERE em.nik NOT IN 
-						(SELECT nik FROM assessment_forms WHERE code LIKE '%$activeYear%')
+						(SELECT nik FROM assessment_forms WHERE code LIKE '%-$activeYear-%')
 						AND em.name NOT LIKE '%admin%'
 						AND em.position_id IN (SELECT id FROM positions WHERE grade <= 3)"
 					)->result();*/
@@ -504,7 +504,7 @@ class Dashboard_model extends CI_Model {
 													JOIN departements dp ON em.dept_id = dp.id
 													JOIN sections sc ON em.section_id = sc.id
 													JOIN job_titles jt ON em.job_title_id = jt.id
-													WHERE a.code LIKE '%$activeYear%' 
+													WHERE a.code LIKE '%-$activeYear-%' 
 													AND a.total_poin IS NULL")->result();
 		
 		/*$fixArray = [];
@@ -647,12 +647,16 @@ class Dashboard_model extends CI_Model {
 	 */
 	public function employe_per_jobtitle(bool $adminOrHR=true, int $sectOrDept=0) : array
 	{
+		$active_year= get_active_year();
+
 		if ($adminOrHR) {
 			return $this->db->query("SELECT 
 										a.name AS job_title, 
 										count(b.nik) AS amount 
 									FROM job_titles a JOIN employes b ON a.id = b.job_title_id
+									JOIN assessment_forms af ON b.nik = af.nik
 									WHERE b.name <> 'admin'
+									AND af.code LIKE '%-$active_year-%' 
 									GROUP BY b.job_title_id")->result();
 		} else {
 			// if AM OR SAM
@@ -661,8 +665,10 @@ class Dashboard_model extends CI_Model {
 											a.name AS job_title, 
 											count(b.nik) AS amount 
 										FROM job_titles a JOIN employes b ON a.id = b.job_title_id
+										JOIN assessment_forms af ON b.nik = af.nik
 										WHERE b.name <> 'admin'
 										AND b.section_id = $sectOrDept
+										AND af.code LIKE '%-$active_year-%' 
 										GROUP BY b.job_title_id")->result();
 			// if DGM or higher
 			} elseif ($this->position_grade > 6 && $this->position_grade < 9) {
@@ -670,8 +676,10 @@ class Dashboard_model extends CI_Model {
 											a.name AS job_title, 
 											count(b.nik) AS amount 
 										FROM job_titles a JOIN employes b ON a.id = b.job_title_id
+										JOIN assessment_forms af ON b.nik = af.nik
 										WHERE b.name <> 'admin'
 										AND b.dept_id = $sectOrDept
+										AND af.code LIKE '%-$active_year-%' 
 										GROUP BY b.job_title_id")->result();
 			// if director
 			} elseif ($this->position_grade > 8) {
@@ -679,7 +687,9 @@ class Dashboard_model extends CI_Model {
 											a.name AS job_title, 
 											count(b.nik) AS amount 
 										FROM job_titles a JOIN employes b ON a.id = b.job_title_id
+										JOIN assessment_forms af ON b.nik = af.nik
 										WHERE b.name <> 'admin'
+										AND af.code LIKE '%-$active_year-%' 
 										GROUP BY b.job_title_id")->result();
 			}
 		}
@@ -693,12 +703,15 @@ class Dashboard_model extends CI_Model {
 	 */
 	public function employe_per_grade2(bool $adminOrHR=true, int $sectOrDept=0) : array
 	{
+		$active_year= get_active_year();
 		if ($adminOrHR) {
 			return $this->db->query("SELECT 
 										grade AS level, 
-										count(nik) AS amount 
+										count(employes.nik) AS amount 
 									FROM employes
-									WHERE name <> 'admin'
+									JOIN assessment_forms af ON employes.nik = af.nik
+									WHERE af.code LIKE '%-$active_year-%' 
+									AND name <> 'admin'
 									AND grade < 4
 									GROUP BY grade")->result();
 		} else {
@@ -708,14 +721,17 @@ class Dashboard_model extends CI_Model {
 				$participants[] = $value->nik;
 			}
 
-			return $this->db->select('grade AS level, count(nik) AS amount ')
+			return $this->db->select('grade AS level, count(employes.nik) AS amount ')
 							->from('employes')
+							->join('assessment_forms af','employes.nik = af.nik')
 							->where('name !=', 'admin')
 							->where_in('nik', $participants)
 							->where('grade <', 4)
+							->like('af.code','-'.$active_year.'-')
 							->group_by('grade')
 							->get()->result();
 		}
+		
 	}
 
 	/**
@@ -835,12 +851,12 @@ class Dashboard_model extends CI_Model {
 										JOIN departements dp ON em.dept_id = dp.id
 										JOIN sections sc ON em.section_id = sc.id
 										JOIN job_titles jt ON em.job_title_id = jt.id
-										WHERE af.code LIKE '%$activeYear%'
+										WHERE af.code LIKE '%-$activeYear-%'
 										AND total_poin IS NOT NULL")->result();
 				break;
 			
 			default:
-				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%$activeYear%'";
+				$subquery    = "SELECT nik FROM assessment_forms WHERE code LIKE '%-$activeYear-%'";
 				$participant = $this->get_participants_by_head($this->nik)->result();
 
 				foreach ($participant as $key => $value) {
