@@ -69,19 +69,24 @@
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
+      
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-
           <!-- User Account: style can be found in dropdown.less -->
           <?php if ($userSession) { ?>
             <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle">
-                <span class="hidden-xs"><?= $userSession['name'] ?></span>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <p><?= $userSession['name'] ?></p>
+              </a>
+            </li>
+            <li class="dropdown messages-menu">
+              <!-- Menu toggle button -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <p> (ASSESSMENT YEAR 2021)</p>
               </a>
             </li>
           <?php } ?>
-          
         </ul>
       </div>
     </nav>
