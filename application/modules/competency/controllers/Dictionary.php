@@ -53,12 +53,16 @@ class Dictionary extends CI_Controller {
 		$skillId     = $this->input->post('skill_type');
 		$nameID      = $this->input->post('name_id');
 		$nameEN      = $this->input->post('name_en');
+		$nameJPN      = $this->input->post('name_jpn');
 		$description = $this->input->post('description');
+		$descriptionJPN = $this->input->post('description_jpn');
 
 		$storedData = [
 			'name_id'     => $nameID,
 			'name_en'     => $nameEN,
+			'name_jpn'     => $nameJPN,
 			'description' => $description,
+			'description_jpn' => $descriptionJPN,
 			'skill_group' => $skillId
 		];
 
@@ -88,11 +92,14 @@ class Dictionary extends CI_Controller {
 	public function edit_competency(int $dictionaryId) : void
 	{
 		$getDictionary = $this->dictionary->get_dictionary_detail($dictionaryId);
+
 		$dictionary = [
 			'id'          => $getDictionary->id,
 			'name_id'     => $getDictionary->name_id,
 			'name_en'     => $getDictionary->name_en,
+			'name_jpn'     => $getDictionary->name_jpn,
 			'description' => $getDictionary->description,
+			'description_jpn' => $getDictionary->description_jpn,
 			'skill_type'  => $getDictionary->skill_group
 		];
 		echo json_encode($dictionary);

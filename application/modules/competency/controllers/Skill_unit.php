@@ -54,17 +54,19 @@ class Skill_unit extends CI_Controller {
 	 */
 	public function store() : void
 	{
-		$isUpdate     = $this->input->post('isUpdate');
-		$dictionaryId = $this->input->post('dictionary_id');
-		$levelDes     = $this->input->post('level_des');
-		$level        = $this->input->post('level');
-		$description  = $this->input->post('description');
+		$isUpdate     		= $this->input->post('isUpdate');
+		$dictionaryId 		= $this->input->post('dictionary_id');
+		$levelDes     		= $this->input->post('level_des');
+		$level        		= $this->input->post('level');
+		$description  		= $this->input->post('description');
+		$description_jpn  	= $this->input->post('description_jpn');
 
 		$storedData = [
 			'id_dictionary' => $dictionaryId,
 			'level_desc'    => $levelDes,
 			'level'         => $level,
-			'description'   => $description
+			'description'   => $description,
+			'description_jpn'   => $description_jpn
 		];
 
 		if ($isUpdate == '') {
@@ -91,7 +93,8 @@ class Skill_unit extends CI_Controller {
 			$skillUnit = [
 				'level_des'   => $skill->level_desc,
 				'level'       => $skill->level,
-				'description' => $skill->description
+				'description' => $skill->description,
+				'description_jpn' => $skill->description_jpn
 			];
 		}
 

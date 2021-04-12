@@ -280,6 +280,14 @@ class Assessment extends CI_Controller {
         redirect(base_url('assessment/form_list'));
     }
 
+    public function form_lang(string $code, string $lang){
+        if ($lang == 'ID' || $lang == 'JPN') {
+            $this->session->set_userdata('language', $lang);
+        }
+
+        redirect(base_url('form/'.$code));
+    }
+
     /**
      * Show all employes by their jobtitle
      * @param int $jobtitle
@@ -584,6 +592,7 @@ class Assessment extends CI_Controller {
         // get employe name
         $data['employname'] = $this->db->where('nik', $nik)->get('employes')->row();
         $data['competency'] = $competency;
+
         $this->load->view('assessment_modal_v', $data);
     }
 
@@ -824,7 +833,13 @@ class Assessment extends CI_Controller {
         // get employe name
         $data['employname'] = $this->db->where('nik', $nik)->get('employes')->row();
         $data['competency'] = $competency;
-        $this->load->view('assessment_modal_view_poin2', $data);
+
+        if ($this->session->userdata('language') == "JPN") {
+            $this->load->view('assessment_modal_view_poin2_jpn', $data);
+        }else{
+            $this->load->view('assessment_modal_view_poin2', $data);
+        }
+        
     }
 
     /**

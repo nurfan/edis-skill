@@ -120,6 +120,7 @@ class Authentication extends CI_Controller {
 	{
 		$createDataLogin = $this->_prepare_user_data($userData->nik);
 		$this->session->set_userdata('login_session',$createDataLogin);
+		$this->session->set_userdata("language", "ID");
 		redirect('dashboard');
 	}
 

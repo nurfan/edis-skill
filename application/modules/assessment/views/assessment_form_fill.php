@@ -29,6 +29,25 @@
             <a class="btn btn-default mr-2" href="<?= base_url('export_to_excel/'.$form_code) ?>">
                 <i class="fa fa-file-excel-o"></i> Export to Excel 
                 </a>
+
+                <?php
+                    if (null !== $this->session->userdata("language") && $this->session->userdata("language") == "JPN") {
+                        $jpn_color = "btn btn-success mr-2";
+                        $id_color = "btn btn-default mr-2";
+                    }else {
+                        $id_color = "btn btn-success mr-2";
+                        $jpn_color = "btn btn-default mr-2";
+                    }
+                ?>
+
+                <div class="pull-right">
+                    <a class="<?= $id_color ?>" href="<?= base_url('form_lang/'.$form_code.'/ID') ?>">
+                        ID
+                    </a>
+                    <a class="<?= $jpn_color ?>" href="<?= base_url('form_lang/'.$form_code.'/JPN') ?>">
+                        JPN 
+                    </a>
+                </div>
                 
                 <!-- <a style="margin-left:5px;" class="btn btn-success mr-2" 
                         data-toggle="modal" 
@@ -65,9 +84,14 @@
                                     data-target="#descriptionCompetency" 
                                     class="header_competency"
                                     colspan="2"
-                                    onclick="showCompetencyDescription('<?= $dictlist->id ?>')" 
-                                >
-                                    <?= strtoupper($dictlist->name_id)  ?>
+                                    onclick="showCompetencyDescription('<?= $dictlist->id ?>')" >
+                                    
+                                    <?php if ($this->session->userdata('language') == 'JPN') { ?>
+                                        <?= strtoupper($dictlist->name_jpn)?>
+                                    <?php }else{ ?>
+                                         <?= strtoupper($dictlist->name_id)?>
+                                    <?php }?>   
+
                                 </th>
                             <?php endforeach; ?>
 

@@ -77,6 +77,18 @@
                 <?= $dictionary->description ?>
               </textarea>
             </div>
+            <div class="form-group">
+              <label for="description">Japanese Description</label>
+              <textarea 
+                name="description_jpn" 
+                id="description_jpn" 
+                class="form-control" 
+                rows="6" 
+                <?= $isDisable ?> 
+                required="">
+                <?= $dictionary->description_jpn ?>
+              </textarea>
+            </div>
 
             <?php if ($userSession['group'] != 3 && ($userSession['level'] != 2 || $userSession['level'] != 3)) { ?>
               
@@ -132,6 +144,7 @@
                 <tr>
                     <th>Level</th>
                     <th>Description</th>
+                    <th>Japanese Description</th>
                     <?php if ($userSession['group'] != 3 && ($userSession['level'] != 2 || $userSession['level'] != 3)) { ?>
                       <th>Action</th>
                     <?php } ?>
@@ -142,6 +155,7 @@
                     <tr>
                         <td><?= $unit->level ?></td>
                         <td><?= $unit->description ?></td>
+                        <td><?= $unit->description_jpn ?></td>
                         <?php if ($userSession['group'] != 3 && ($userSession['level'] != 2 || $userSession['level'] != 3)) { ?>
                           <th>
                             <button 
@@ -193,6 +207,10 @@
                     <label for="name_id">Description</label>
                     <textarea name="description" class="form-control" id="description" rows="5" required=""></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="name_id">Japanese Description</label>
+                    <textarea name="description_jpn" class="form-control" id="description_jpn" rows="5" required=""></textarea>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" id="btnSubmit"></button>
@@ -212,6 +230,7 @@
       $('#level_des').val('');
       $('#level').val('');
       $('#description').val('');
+      $('#description_jpn').val('');
       $('#btnSubmit').text('Save');
     } else {
       $('.modal-title').text('Edit Data');
@@ -222,6 +241,7 @@
         $('#level_des').val(skillUnitData.level_des);
         $('#level').val(skillUnitData.level);
         $('textarea#description').val(skillUnitData.description);
+        $('textarea#description_jpn').val(skillUnitData.description_jpn);
       })
     }
   }

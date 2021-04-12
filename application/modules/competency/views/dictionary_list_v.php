@@ -86,8 +86,16 @@
                     <input type="text" class="form-control" id="name_en" value="" name="name_en">
                 </div>
                 <div class="form-group">
+                    <label for="name_en">Japanese Name</label>
+                    <input type="text" class="form-control" id="name_jpn" value="" name="name_jpn">
+                </div>
+                <div class="form-group">
                     <label for="name_id">Decription</label>
                     <textarea name="description" class="form-control" id="description" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="name_id">Japanese Decription</label>
+                    <textarea name="description_jpn" class="form-control" id="description_jpn" rows="5"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -109,7 +117,9 @@
                 $('input[name="isUpdate"]').val('');
                 $('input[name="name_id"]').val('');
                 $('input[name="name_en"]').val('');
+                $('input[name="name_jpn"]').val('');
                 $('textarea#description').val('');
+                $('textarea#description_jpn').val('');
                 $('#btnSubmit').text('Save');
                 break;
             // for edit competency dictionary data
@@ -122,7 +132,9 @@
                     $('input[name="isUpdate"]').val(res.id);
                     $('input[name="name_id"]').val(res.name_id);
                     $('input[name="name_en"]').val(res.name_en);
+                    $('input[name="name_jpn"]').val(res.name_jpn);
                     $('textarea#description').val(res.description);
+                    $('textarea#description_jpn').val(res.description_jpn);
                 })
                 break;
         }

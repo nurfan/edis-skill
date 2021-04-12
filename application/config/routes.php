@@ -72,6 +72,7 @@ $route['assessment/reset'] = 'manage/reset';
 $route['assessment/reset/submit'] = 'manage/reset/submit';
 $route['assessment/reset/list/job'] = 'manage/reset/list_job';
 $route['form/(:any)'] = 'assessment/form/$1';
+$route['form_lang/(:any)/(:any)'] = 'assessment/form_lang/$1/$2';
 $route['form/upload'] = 'assessment/upload';
 $route['nik/(:num)/jobtitle/(:num)/competency/(:num)/assessment'] = 'assessment/get_competency/$1/$2/$3';
 $route['assessment/(:num)/competency/(:any)/nik/(:num)/jobid'] = 'assessment/see_poin/$1/$2/$3';

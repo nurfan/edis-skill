@@ -115,7 +115,10 @@ class Assessment_model extends CI_Model {
 			a.level,
 			b.id,
 			b.name_id,
-			b.description');
+			b.name_en,
+			b.name_jpn,
+			b.description,
+			b.description_jpn');
 		$this->db->from('skill_matrix a');
 		$this->db->join('skill_dictionaries b', 'a.skill_id = b.id');
 		$this->db->where('a.job_id', $jobtitle);
@@ -290,6 +293,7 @@ class Assessment_model extends CI_Model {
 				                            assessment_form_questions.weight,
 				                            assessment_form_questions.poin, 
 				                            skill_units.description,
+				                            skill_units.description_jpn,
 				                            skill_units.level
 										FROM assessment_forms
 										JOIN assessment_form_questions ON assessment_forms.id = assessment_form_questions.form_id
@@ -545,12 +549,15 @@ class Assessment_model extends CI_Model {
 
 	public function employe_has_competency($spv, $dept, $sect)
 	{
+		$active_year = get_active_year();
+
 		return $this->db->query("SELECT em.* FROM employes em
 								JOIN employee_relations er ON em.nik = er.nik
 								JOIN assessment_forms af ON em.nik = af.nik
 								WHERE em.dept_id = $dept
 								AND em.section_id = $sect
 								AND em.grade < 4
+								AND af.code LIKE '%-$active_year-%'
 								AND er.head = '$spv'")->result();
 	}
 
