@@ -725,7 +725,7 @@ class Dashboard_model extends CI_Model {
 							->from('employes')
 							->join('assessment_forms af','employes.nik = af.nik')
 							->where('name !=', 'admin')
-							->where_in('nik', $participants)
+							->where_in('employes.nik', $participants)
 							->where('grade <', 4)
 							->like('af.code','-'.$active_year.'-')
 							->group_by('grade')
