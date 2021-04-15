@@ -593,7 +593,11 @@ class Assessment extends CI_Controller {
         $data['employname'] = $this->db->where('nik', $nik)->get('employes')->row();
         $data['competency'] = $competency;
 
-        $this->load->view('assessment_modal_v', $data);
+        if ($this->session->userdata('language') == "JPN") {
+            $this->load->view('assessment_modal_jpn_v', $data);
+        }else{
+            $this->load->view('assessment_modal_v', $data);
+        }
     }
 
     /**

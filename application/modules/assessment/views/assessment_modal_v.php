@@ -9,11 +9,11 @@
             <div class="alert alert-info">
                 <h4>Nilai Mentah</h4>
                 <p>
-                    1 = Sangat tidak baik,&nbsp;&nbsp;&nbsp;  
-                    2 = Tidak baik,&nbsp;&nbsp;&nbsp;  
-                    3 = Cukup,&nbsp;&nbsp;&nbsp;  
-                    4 = Baik,&nbsp;&nbsp;&nbsp;  
-                    5 = Sangat baik
+                    1 = Baru mengetahui (novice),&nbsp;&nbsp;&nbsp;  
+                    2 = Pemula (beginner),&nbsp;&nbsp;&nbsp;  
+                    3 = Mampu (comptent),&nbsp;&nbsp;&nbsp;  
+                    4 = Mahir (proficient),&nbsp;&nbsp;&nbsp;  
+                    5 = Ahli (expert)
                 </p>
             </div>
             <div class="alert alert-warning">

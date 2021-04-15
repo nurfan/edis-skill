@@ -1,24 +1,24 @@
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
+<?php if ($this->session->userdata('language') == "JPN") { ?>
+    <h4 class="modal-title" id="title-mod"><?= $dictionary->name_jpn ?> | <?= $employname->name ?></h4>
+    <h5><?= $dictionary->description_jpn ?></h5>
+<?php }else{ ?>
     <h4 class="modal-title" id="title-mod"><?= $dictionary->name_id ?> | <?= $employname->name ?></h4>
     <h5><?= $dictionary->description ?></h5>
-</div>
+<?php } ?>
 <div class="modal-body">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="alert alert-info">
-                <h4>Nilai Mentah</h4>
-                <p>
-                    1 = Sangat tidak baik,&nbsp;&nbsp;&nbsp;  
-                    2 = Tidak baik,&nbsp;&nbsp;&nbsp;  
-                    3 = Cukup,&nbsp;&nbsp;&nbsp;  
-                    4 = Baik,&nbsp;&nbsp;&nbsp;  
-                    5 = Sangat baik
-                </p>
-            </div>
-            <div class="alert alert-warning">
-                <p>Hanya dapat memilih <b>SATU</b> pernyataan dari lima pernyataan yang tersedia</p>
-            </div>
+        <div class="alert alert-info">
+            <h4>Raw Score</h4>
+            <p>
+                1 = 初心者,&nbsp;&nbsp;&nbsp;  
+                2 = ビギナー,&nbsp;&nbsp;&nbsp;  
+                3 = 有能,&nbsp;&nbsp;&nbsp;  
+                4 = 熟練している,&nbsp;&nbsp;&nbsp;  
+                5 = 専門
+            </p>
+        </div>
+        <div class="alert alert-warning">
+            <p>使用可能な5つのステートメントから1つのステートメントのみを選択できます</p>
         </div>
     </div>
     <div class="table-wrap">
@@ -28,7 +28,7 @@
                     <tr>
                         <th>Level</th>
                         <th style="white-space:nowrap;">Pernyataan</th>
-                        <th style="white-space:nowrap;">Nilai Mentah</th>
+                        <th style="white-space:nowrap;">Raw Score</th>
                         <!-- <th style="white-space:nowrap;">Bobot</th> -->
                     </tr>
                 </thead>

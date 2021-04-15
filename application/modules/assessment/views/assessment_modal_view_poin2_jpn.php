@@ -13,17 +13,17 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="alert alert-info">
-                <h4>Nilai Mentah</h4>
+                <h4>Raw Score</h4>
                 <p>
-                    1 = Sangat tidak baik,&nbsp;&nbsp;&nbsp;  
-                    2 = Tidak baik,&nbsp;&nbsp;&nbsp;  
-                    3 = Cukup,&nbsp;&nbsp;&nbsp;  
-                    4 = Baik,&nbsp;&nbsp;&nbsp;  
-                    5 = Sangat baik
+                    1 = 初心者,&nbsp;&nbsp;&nbsp;  
+                    2 = ビギナー,&nbsp;&nbsp;&nbsp;  
+                    3 = 有能,&nbsp;&nbsp;&nbsp;  
+                    4 = 熟練している,&nbsp;&nbsp;&nbsp;  
+                    5 = 専門
                 </p>
             </div>
             <div class="alert alert-warning">
-                <p>Hanya dapat memilih <b>SATU</b> pernyataan dari lima pernyataan yang tersedia</p>
+                <p>使用可能な5つのステートメントから1つのステートメントのみを選択できます</p>
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
                     <tr>
                         <th>Level</th>
                         <th style="white-space:nowrap;">行動レベルと説明</th>
-                        <th style="white-space:nowrap;">Nilai Mentah</th>
+                        <th style="white-space:nowrap;">Raw Score</th>
                         <!-- <th style="white-space:nowrap;">Bobot</th> -->
                     </tr>
                 </thead>

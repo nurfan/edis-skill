@@ -362,6 +362,8 @@ class Assessment_model extends CI_Model {
 
 	public function get_jobtitle_by_head(int $nik=0) : array 
 	{
+		$activeYear = get_active_year();
+
 		$this->db->select('
 			a.job_title_id, 
 			a.section_id,
@@ -377,6 +379,7 @@ class Assessment_model extends CI_Model {
 		$this->db->join('job_titles b', 'a.job_title_id = b.id');
 		$this->db->join('sections c', 'c.id = a.section_id');
 		$this->db->where_in('emr.head', $this->get_head($nik));
+		$this->db->like('af.code', '-'.$activeYear.'-');
 		$this->db->group_by('a.job_title_id, a.section_id, a.grade, emr.head, af.code');
 		$this->db->order_by('a.grade', 'asc');
 		return $this->db->get()->result();

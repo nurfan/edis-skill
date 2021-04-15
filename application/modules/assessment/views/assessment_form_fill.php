@@ -14,7 +14,7 @@
 </style>
 
 <section class="content-header">
-	<h3 class="box-title">Form Penilaian | <?= $jobTitleName->name ?></h3>
+	<h3 class="box-title">Assessment Form | <?= $jobTitleName->name ?></h3>
 	<!-- <ol class="breadcrumb">
 		<h3 class="box-title pull-right">Waktu pengisian form penilaian skill 2 - 15 Maret 2020</h3>
 	</ol> -->
@@ -251,7 +251,8 @@
                     </tbody>
 				</table>
                 </div>
-				<a href="<?= base_url('assessment') ?>" class="btn btn-primary pull-right"><i class="fa fa-chevron-left"></i> Back</a>
+                <br>
+				<a href="<?= base_url('assessment') ?>" class="btn btn-default pull-right"><i class="fa fa-chevron-left"></i> Back</a>
 			</form>
 		</div>
 	</div>
@@ -285,11 +286,11 @@
                 <p>
                     Dimana:
                     <ul>
-                        <li>1 = Sangat tidak baik</li>
-                        <li>2 = Tidak baik</li>
-                        <li>3 = Cukup</li>
-                        <li>4 = Baik</li>
-                        <li>5 = Sangat baik</li>
+                        <li>1 = Baru mengetahui (novice)</li>
+                        <li>2 = Pemula (beginner)</li>
+                        <li>3 = Mampu (comptent)</li>
+                        <li>4 = Mahir (proficient)</li>
+                        <li>5 =Ahli (expert)</li>
                     </ul>
                 </p>
             </div>
