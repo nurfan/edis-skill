@@ -55,14 +55,14 @@ class Authentication extends CI_Controller {
 		 	
 		 	if ($nik != "") {
 		 		// do verification for user's password
-		 		//if ($this->ldap_verification($ldap_id, $password)) {
+		 		if ($this->ldap_verification($ldap_id, $password)) {
 		 			// create log for success login
 		 			$this->_auth_log($nik);
 		 			// create login session and redirect them to dahsboard
 		 			$this->_login_success($user);
-		 		//}
+		 		}
 		 		// handle fail login - wrong password
-		 		//$this->session->set_flashdata('login_fail', 'Your password is wrong!');
+		 		$this->session->set_flashdata('login_fail', 'Your password is wrong!');
 		 		redirect('auth/authentication');
 		 	}
 		 	// handle fail login - wrong password

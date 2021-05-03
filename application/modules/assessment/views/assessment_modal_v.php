@@ -11,7 +11,7 @@
                 <p>
                     1 = Baru mengetahui (novice),&nbsp;&nbsp;&nbsp;  
                     2 = Pemula (beginner),&nbsp;&nbsp;&nbsp;  
-                    3 = Mampu (comptent),&nbsp;&nbsp;&nbsp;  
+                    3 = Mampu (competent),&nbsp;&nbsp;&nbsp;  
                     4 = Mahir (proficient),&nbsp;&nbsp;&nbsp;  
                     5 = Ahli (expert)
                 </p>

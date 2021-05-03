@@ -139,7 +139,7 @@ class Manage_model extends CI_Model {
 	 */
 	public function get_employes() : object
 	{
-		$this->db->select('a.*, b.name as section, c.name as position, d.name as jobtitle');
+		$this->db->select('a.*, b.name as section, c.name as position, d.name as jobtitle, (SELECT head FROM employee_relations WHERE nik = a.nik limit 1) AS nik_head');
 		$this->db->from('employes a');
 		$this->db->join('sections b', 'a.section_id = b.id', 'left');
 		$this->db->join('positions c', 'a.position_id = c.id', 'left');

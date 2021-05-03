@@ -1,13 +1,17 @@
-<?php if ($this->session->userdata('language') == "JPN") { ?>
-    <h4 class="modal-title" id="title-mod"><?= $dictionary->name_jpn ?> | <?= $employname->name ?></h4>
-    <h5><?= $dictionary->description_jpn ?></h5>
-<?php }else{ ?>
-    <h4 class="modal-title" id="title-mod"><?= $dictionary->name_id ?> | <?= $employname->name ?></h4>
-    <h5><?= $dictionary->description ?></h5>
-<?php } ?>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <?php if ($this->session->userdata('language') == "JPN") { ?>
+        <h4 class="modal-title" id="title-mod"><?= $dictionary->name_jpn ?> | <?= $employname->name ?></h4>
+        <h5><?= $dictionary->description_jpn ?></h5>
+    <?php }else{ ?>
+        <h4 class="modal-title" id="title-mod"><?= $dictionary->name_id ?> | <?= $employname->name ?></h4>
+        <h5><?= $dictionary->description ?></h5>
+    <?php } ?>
+</div>
 <div class="modal-body">
     <div class="row">
-        <div class="alert alert-info">
+        <div class="col-sm-12">
+             <div class="alert alert-info">
             <h4>Raw Score</h4>
             <p>
                 1 = 初心者,&nbsp;&nbsp;&nbsp;  
@@ -27,7 +31,7 @@
                 <thead>
                     <tr>
                         <th>Level</th>
-                        <th style="white-space:nowrap;">Pernyataan</th>
+                        <th style="white-space:nowrap;">Description</th>
                         <th style="white-space:nowrap;">Raw Score</th>
                         <!-- <th style="white-space:nowrap;">Bobot</th> -->
                     </tr>

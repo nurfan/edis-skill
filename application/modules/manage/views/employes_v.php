@@ -34,6 +34,7 @@
                   <th>Position</th>
                   <th>Job Title</th>
                   <th>Grade</th>
+                  <th>Head</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -48,6 +49,7 @@
                   <td><?= $employe->position ?></td>
                   <td><?= $employe->jobtitle ?></td>
                   <td><?= $employe->grade ?></td>
+                  <td><?= $employe->nik_head ?></td>
                   <td>
                     <span class="badge <?= is_null($employe->deleted_at) ? "bg-green" : "bg-red"; ?>">
                       <?= is_null($employe->deleted_at) ? "Active" : "Nonactive"; ?>

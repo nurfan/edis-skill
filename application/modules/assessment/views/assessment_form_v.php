@@ -55,7 +55,7 @@
 					<thead>
                         <tr>
                             <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">NIK</th>
-                            <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">Nama Pegawai</th>
+                            <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">Employee Name</th>
 
                             <?php foreach ($dictionary->result() as $dictlist) : ?>
                                 <th 
@@ -69,7 +69,7 @@
                                 </th>
                             <?php endforeach; ?>
 
-                            <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">Nilai Absolut</th>
+                            <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">Total Score</th>
                             <th style="white-space:nowrap; vertical-align: middle;" rowspan="2">Level</th>
                         </tr>
                         <div class="tableFicHeadR2">
@@ -78,12 +78,12 @@
                             <?php for ($i = 0; $i < count($dictionary->result()); $i++) : ?>
                                 <!-- edit poin just show if user is assessment participant -->
                                 <?php if($sess_login['group'] == 3 && ($sess_login['level'] == 2 || $sess_login['level'] == 1)) : ?>
-                                    <th style="text-align:center; position: sticky; top: 150px;">Isi Nilai</th>
+                                    <th style="text-align:center; position: sticky; top: 150px;">Score Input</th>
                                 <!-- see detail poin show if user admin/PA -->
                                 <?php elseif ($sess_login['group'] == 1 || $sess_login['group'] == 2) : ?>
-                                    <th style="text-align:center; position: sticky; top: 150px;">Detail Nilai</th>
+                                    <th style="text-align:center; position: sticky; top: 150px;">Detail Score</th>
                                 <?php endif; ?>
-                                <th style="text-align:center; position: sticky; top: 150px;">Nilai</th>
+                                <th style="text-align:center; position: sticky; top: 150px;">Score</th>
                             <?php endfor; ?>
 
                         </tr>
