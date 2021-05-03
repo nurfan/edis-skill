@@ -258,7 +258,7 @@ class Dashboard_model extends CI_Model {
 	 */
 	public function complete2(bool $notAdminOrHR=FALSE, int $sectOrDept=0)
 	{
-		$activeYear = get_active_year();
+		$activeYear = "-".get_active_year()."-";
 
 		switch ($notAdminOrHR) {
 			case FALSE:
@@ -837,7 +837,7 @@ class Dashboard_model extends CI_Model {
 	 */
 	public function complete_detail2(bool $notAdminOrHR=FALSE, int $sectOrDept=0)
 	{
-		$activeYear = get_active_year();
+		$activeYear = "-".get_active_year()."-";
 
 		switch ($notAdminOrHR) {
 			case FALSE:
