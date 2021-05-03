@@ -163,7 +163,7 @@
                                     /*=====  End of Condition for Poin Button  ======*/
                                     // get assessment form to get its ID
                                     $assessmentForm = $this->db->where('nik', $employe->nik)
-                                    							->like('code',$active_year,'both')
+                                    							->like('code',"-".$active_year."-",'both')
                                     							->get('assessment_forms');
 
                                     // its ID will use to get detail form question
